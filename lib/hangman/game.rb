@@ -1,18 +1,18 @@
 require_relative('random_word')
 
 class Game
-  def initialize(word, guesses_left, guessed_letters, game_state)
+  def initialize(word, game_state, guesses_left = 12, guessed_letters = [])
     @word = word
+    @game_state = game_state
     @guesses_left = guesses_left
     @guessed_letters = guessed_letters
-    @game_state = game_state
   end
 
   def self.create_game
     word = random_word
-    guesses_left = 12
-    guessed_letters = []
     game_state = Array.new(word.length) { '_' }
-    new(word, guesses_left, guessed_letters, game_state)
+    new(word, game_state)
   end
+
+
 end
