@@ -25,25 +25,11 @@ class Game
 
   def game_loop
     until @guesses_left == 0
-      # get user guess
-        # update letters guessed
       guess = user_guess
       @guessed_letters.append(guess)
-      # check if user guess was correct
-        # yes: 
-          # indicate correct guess
-          # update game state
-          # check for win
-            # yes:
-              # indicate win
-              # break
-            # no:
-              # continue
-        # no: 
-          # indicate incorrect guess
-      # update guesses left
-      # display word
+      update_game_state(guess)
       # check for win
+      # update guesses left
       # check if user wants to save game
     end
   end
@@ -51,9 +37,24 @@ class Game
   def user_guess
     puts "Guessed Letters: #{@guessed_letters.join(', ')}" unless @guessed_letters.empty?
     loop do
-      puts 'Please choose an unpicked letter.'
+      puts 'Please choose an unpicked letter:'
       guess = gets.chomp.downcase
       return guess unless @guessed_letters.include?(guess) || !('a'..'z').to_a.include?(guess)
     end
+  end
+
+  def update_game_state(guess)
+    puts "\n"
+    if @word.include?(guess)
+      puts 'Correct!'
+      find_indicies(guess).each { |index| @game_state[index] = @word[index] }
+    else
+      puts "Incorrect!"
+    end
+    puts "#{@game_state.join(' ')}\n\n"
+  end
+
+  def find_indicies(guess)
+    @word.each_with_index.map { |letter, index| index if letter == guess }.compact
   end
 end
