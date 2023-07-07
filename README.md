@@ -32,14 +32,31 @@ class Game
 The main problem that should be addressed before coding is how to check if the user's guess is correct or not. Other than that, the rest of the code is mainly smaller problems that rely more on utilizing Ruby's built in methods for each object efficiently to solve this problem. The following pseudocode provides a general solution for how the game will run, rather, this will be the 'game loop'
 ```
 until number of guesses left is 0
-  get user guess
+  get user guess -- or save
     update letters guessed
   is user guess in word?
     yes: indicate correct guess, update word state (ex: _ _ _ _ becomes h _ h _), display the word state
     no: indicate incorrect guess, redisplay the word state
   update guesses left
   check for a win
-  check if user wants to save game
+```
+
+With the game loop done, the last problem now becomes how to load a saved game. When starting the main .rb file we can choose to have the user pick if they want to start a new game, or load an existing one. Loading a new game is simple, as it involves creating a game object and then starting the game loop. However, if the user chooses to load a game several things need to happen.
+1. First, we need to check if there even are saved games.
+    * Backtracking slightly -- we should check for this before asking the user if they want to load a saved game. If there aren't any, why give them the option?
+2. Load the names of the files associated with saved games
+    * This will then be displayed to the user to choose from
+    * These should be displayed with a number, making it easy for the user to pick what saved game they want to load
+3. On picking a saved game, the yaml file should be opened properly, and a load method should be created in Game to create a new game object with the saved information.
+
+```
+if saved games?
+  ask user if they want to start a new game or load a saved game
+  if load save game?
+    display to user their options
+    call load method for a game with yaml file information
+  if new game
+    create new game
 ```
 
 # Acknowledgements
