@@ -27,6 +27,8 @@ class Game
     until @guesses_left == 0
       # get user guess
         # update letters guessed
+      guess = user_guess
+      
       # check if user guess was correct
         # yes: 
           # indicate correct guess
@@ -46,8 +48,10 @@ class Game
     end
   end
 
-  # def user_guess
-  #   
-  # end
+  def user_guess
+    puts "Guessed Letters: @guessed_letters.join(', ')" unless @guessed_letters.empty?
+    puts 'Please choose an unpicked letter'
+    gets.chomp
+  end
 
 end
