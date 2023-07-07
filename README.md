@@ -41,6 +41,7 @@ until number of guesses left is 0
   check for a win
 ```
 
+### `Hangman.rb`
 With the game loop done, the last problem now becomes how to load a saved game. When starting the main .rb file we can choose to have the user pick if they want to start a new game, or load an existing one. Loading a new game is simple, as it involves creating a game object and then starting the game loop. However, if the user chooses to load a game several things need to happen.
 1. First, we need to check if there even are saved games.
     * Backtracking slightly -- we should check for this before asking the user if they want to load a saved game. If there aren't any, why give them the option?
@@ -57,6 +58,7 @@ if saved games?
     call load method for a game with yaml file information
   if new game
     create new game
+otherwise create new game
 ```
 
 # Acknowledgements
