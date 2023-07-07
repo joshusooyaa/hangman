@@ -37,8 +37,8 @@ until number of guesses left is 0
   is user guess in word?
     yes: indicate correct guess, update word state (ex: _ _ _ _ becomes h _ h _), display the word state
     no: indicate incorrect guess, redisplay the word state
-  check for a win
   update guesses left
+  check for a win
   check if user wants to save game
 ```
 

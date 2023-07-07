@@ -24,12 +24,14 @@ class Game
   private
 
   def game_loop
-    until @guesses_left == 0
+    until @guesses_left.zero?
       guess = user_guess
       @guessed_letters.append(guess)
       update_game_state(guess)
-      # check for win
-      # update guesses left
+      @guesses_left -= 1
+      break if win?
+
+      display_guesses_left
       # check if user wants to save game
     end
   end
@@ -49,12 +51,26 @@ class Game
       puts 'Correct!'
       find_indicies(guess).each { |index| @game_state[index] = @word[index] }
     else
-      puts "Incorrect!"
+      puts 'Incorrect!'
     end
     puts "#{@game_state.join(' ')}\n\n"
   end
 
   def find_indicies(guess)
     @word.each_with_index.map { |letter, index| index if letter == guess }.compact
+  end
+
+  def win?
+    won = @game_state.include?('_') ? false : true
+    puts "You won in #{12 - @guesses_left} guesses!" if won
+    won
+  end
+
+  def display_guesses_left
+    if @guesses_left.zero?
+      puts "You ran out of guesses!\nThe word was #{@word.join('')}.\nBetter luck next time!"
+    else
+      puts "Guesses left: #{@guesses_left}\n\n"
+    end
   end
 end
