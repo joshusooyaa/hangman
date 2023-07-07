@@ -35,7 +35,7 @@ until number of guesses left is 0
   get user guess
     update letters guessed
   is user guess in word?
-    yes: indicate correct guess, update word state (ex: _ _ _ _ becomes h _ h _)
+    yes: indicate correct guess, update word state (ex: _ _ _ _ becomes h _ h _), check for win
     no: indicate incorrect guess
   update guesses left
   display word
