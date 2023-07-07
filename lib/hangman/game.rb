@@ -28,7 +28,7 @@ class Game
       # get user guess
         # update letters guessed
       guess = user_guess
-      
+      @guessed_letters.append(guess)
       # check if user guess was correct
         # yes: 
           # indicate correct guess
@@ -49,9 +49,11 @@ class Game
   end
 
   def user_guess
-    puts "Guessed Letters: @guessed_letters.join(', ')" unless @guessed_letters.empty?
-    puts 'Please choose an unpicked letter'
-    gets.chomp
+    puts "Guessed Letters: #{@guessed_letters.join(', ')}" unless @guessed_letters.empty?
+    loop do
+      puts 'Please choose an unpicked letter.'
+      guess = gets.chomp.downcase
+      return guess unless @guessed_letters.include?(guess) || !('a'..'z').to_a.include?(guess)
+    end
   end
-
 end
