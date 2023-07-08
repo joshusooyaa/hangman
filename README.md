@@ -1,6 +1,14 @@
 # Overview
 A project to improve foundational ruby skills, and working with files.
 
+# How to play
+In the root directory, run 'ruby lib/hangman.rb\
+On first loading the game, the game will automatically start a new game. The user then will have the option to guess, or save the state of their game by typing 'save'. If the user decides not to save, they then must guess what letter they think is in the word. If they guess correctly, it'll display the updated word. If not, it'll indicate an incorrect guess. After each round (or rather, guess), the player's number of guesses is reduced. The game ends when the player has guessed the word correctly, or when they run out of guesses.\
+If the user starts the game with saved files, they will have the option to chose from their saved files, or to start a new game. If they choose to load, they will be given a list of file names showing the state of the game when it was saved. Example: 3) j__h.yaml  will display to indicate that their third save slot has that much accomplished. If they wish to load that, they can type in '3' and it will load that game from where they left off.
+
+# Known issues
+There are a few issues I know that exist. Firstly, if a user wins/loses a game, the previous save of that game doesn't get deleted. The only reason this is an issues is because a user could essentially get as many guesses as they want until they beat it by reloaded a past save. Kind of defeats the purpose of having number of guesses.
+
 # Problem
 In order to create the classic game "hangman" there are several things to consider:
 1. What word will be used
