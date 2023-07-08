@@ -1,4 +1,5 @@
-require_relative('random_word')
+require_relative('helper')
+require 'yaml'
 
 class Game
   def initialize(word, game_state, guesses_left = 12, guessed_letters = [])
@@ -26,21 +27,25 @@ class Game
   def game_loop
     until @guesses_left.zero?
       guess = user_guess
+      if guess == 'save'
+        save_game
+        continue_playing? ? next : break
+      end
       @guessed_letters.append(guess)
       update_game_state(guess)
       @guesses_left -= 1
       break if win?
 
       display_guesses_left
-      # check if user wants to save game
     end
   end
 
   def user_guess
     puts "Guessed Letters: #{@guessed_letters.join(', ')}" unless @guessed_letters.empty?
     loop do
-      puts 'Please choose an unpicked letter:'
+      puts "Please choose an unpicked letter, or type 'save' to save:"
       guess = gets.chomp.downcase
+      return guess if guess == 'save'
       return guess unless @guessed_letters.include?(guess) || !('a'..'z').to_a.include?(guess)
     end
   end
@@ -72,5 +77,18 @@ class Game
     else
       puts "Guesses left: #{@guesses_left}\n\n"
     end
+  end
+
+  def save_game
+    yaml_data = YAML.dump(self)
+    path = File.expand_path("../../saved/#{@word.join('')}.yaml", __dir__)
+    File.open(path, 'w') { |file| file.write(yaml_data) }
+    puts 'Game Successfully Saved!'
+  end
+
+  def continue_playing?
+    puts "Would you like to continue?\nyes/no"
+    response = gets.chomp.downcase
+    response == 'yes'
   end
 end
