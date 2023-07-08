@@ -1,0 +1,15 @@
+--- !ruby/object:Game
+word:
+- t
+- e
+- r
+- r
+- "y"
+game_state:
+- _
+- _
+- _
+- _
+- _
+guesses_left: 12
+guessed_letters: []

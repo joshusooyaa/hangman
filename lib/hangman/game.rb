@@ -1,4 +1,4 @@
-require_relative('helper')
+require_relative('file_opener')
 require 'yaml'
 
 class Game
@@ -16,7 +16,6 @@ class Game
   end
 
   def start
-    puts "Welcome to Hangman!\nYour task is to figure out the word in 12 guesses!"
     puts "Your word to guess is: #{@game_state.join(' ')}"
     puts 'Good luck!'
     game_loop
@@ -81,7 +80,7 @@ class Game
 
   def save_game
     yaml_data = YAML.dump(self)
-    path = File.expand_path("../../saved/#{@word.join('')}.yaml", __dir__)
+    path = File.expand_path("../../saved/#{@game_state.join('')}.yaml", __dir__)
     File.open(path, 'w') { |file| file.write(yaml_data) }
     puts 'Game Successfully Saved!'
   end
